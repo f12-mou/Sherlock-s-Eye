@@ -1,0 +1,247 @@
+<style>
+    .infoEdit{
+        display: block;
+        text-align: left;
+        margin: auto;
+        width: 750px;
+        padding: 20px;
+        box-shadow: 3px 3px 3px 3px rgb(204, 204, 204);
+    }
+    .form-group-row{
+        display: inline-block;
+    }
+    .form-group-row{
+        font-weight: bold;
+    }
+    .btn{
+        color: white;
+        background-color: #940031;
+    }
+    .btn:hover{
+        background-color: white;
+        color: #940031;
+    }
+</style>
+
+<script>
+    var subjectObject = {
+      "Dhaka": {
+        "Dhaka":[ "Savar", "Dhamrai", "Keraniganj", "Nawabganj", "Dohar" ],
+        "Faridpur":[ "Faridpur Sadar",  "Alfadanga",   "Boalmari",  "Sadarpur",  "Nagarkanda",  "Bhanga",  "Charbhadrasan",  "Madhukhali",  "Saltha"],
+        "Gazipur":[ "Kaliganj",  "Kaliakair",  "Kapasia",  "Gazipur Sadar",  "Sreepur"],
+        "Gopalganj":["Gopalganj Sadar",  "Kashiani",  "Tungipara",  "Kotalipara",  "Muksudpur"],
+        "Kishoreganj":[ "Itna",  "Katiadi",  "Bhairab",  "Tarail",  "Hossainpur",  "Pakundia",  "Kuliarchar",  "Kishoreganj Sadar",  
+        "Karimgonj",  "Bajitpur",  "Austagram",  "Mithamoin",  "Nikli" ],
+        "Madaripur":[ "Madaripur Sadar",  "Shibchar",  "Kalkini",  "Rajoir"],
+        "Manikganj":[ "Harirampur",  "Saturia",  "Manikganj Sadar",  "Gior",  "Shibaloy",  "Doulatpur",  "Singiar"],
+        "Narayanganj":[ "Araihazar",  "Bandar",  "Narayanganj Sadar",  "Rupganj",  "Sonargaon"],
+        "Narsingdi":[ "Belabo",  "Monohardi",  "Narsingdi Sadar",  "Palash",  "Raipura",  "Shibpur"],
+        "Rajbari":[ "Rajbari Sadar",  "Goalanda",  "Pangsa",  "Baliakandi",  "Kalukhali"],
+        "Shariatpur":[ "Shariatpur Sadar",  "Naria",  "Zajira",  "Gosairhat",  "Bhedarganj",  "Damudya"]
+          
+      },
+      "Chattogram": {
+        "PHP": ["Variables", "Strings", "Arrays"],
+        "SQL": ["SELECT", "UPDATE", "DELETE"]
+      },
+      "Rajshahi": {
+        "PHP": ["Variables", "Strings", "Arrays"],
+        "SQL": ["SELECT", "UPDATE", "DELETE"]
+      },
+      "Khulna": {
+        "PHP": ["Variables", "Strings", "Arrays"],
+        "SQL": ["SELECT", "UPDATE", "DELETE"]
+      },
+      "Barishal": {
+        "Barisal": [ "Barisal Sadar",  "Bakerganj",  "Babuganj",  "Wazirpur",  "Banaripara",  "Gournadi",  "Agailjhara",  "Mehendiganj",  "Muladi",  "Hizla" ],
+        "Jhalakathi": [ "Jhalakathi Sadar",  "Kathalia",  "Nalchity",  "Rajapur",  "Bauphal"],
+        "Patuakhali":[ "Patuakhali Sadar",  "Dumki",  "Dashmina",  "Kalapara",  "Mirzaganj",  "Galachipa",  "Rangabali"],
+        "Pirojpur":[ "Pirojpur Sadar",  "Nazirpur",  "Kawkhali",  "Zianagar",  "Bhandaria",  "Mathbaria",  "Nesarabad"],
+        "Bhola":[ "Bhola Sadar",  "Borhan Sddin",  "Charfesson",  "Doulatkhan",  "Monpura",  "Tazumuddin",  "Lalmohan"],
+        "Barguna":[ "Amtali",  "Barguna Sadar",  "Betagi",  "Bamna",  "Pathorghata",  "Taltali"]
+
+      },
+      "Sylhet": {
+        "Sylhet": [ "Balaganj",  "Beanibazar",  "Bishwanath",  "Companiganj",  "Fenchuganj",  "Golapganj",  "Gowainghat",  "Jaintiapur", 
+         "Kanaighat",  "Sylhet Sadar",  "Zakiganj",  "Dakshinsurma",  "Osmaninagar"],
+        "Moulvibazar": [ "Barlekha",  "Kamolganj",  "Kulaura",  "Moulvibazar Sadar",  "Rajnagar",  "Sreemangal",  "Juri"],
+        "Habiganj":[ "Nabiganj",  "Bahubal",  "Ajmiriganj",  "Baniachong",  "Lakhai",  "Chunarughat",  "Habiganj Sadar",  "Madhabpur"],
+        "Sunamganj":[ "Sunamganj Sadar",  "South Sunamganj",  "Bishwambarpur",  "Chhatak",  "Jagannathpur",  "Dowarabazar",  "Tahirpur", 
+        "Dharmapasha",  "Jamalganj",  "Shalla",  "Derai"]
+      },
+      "Rangpur": {
+        "PHP": ["Variables", "Strings", "Arrays"],
+        "SQL": ["SELECT", "UPDATE", "DELETE"]
+      },
+      "Mymensingh": {
+        "PHP": ["Variables", "Strings", "Arrays"],
+        "SQL": ["SELECT", "UPDATE", "DELETE"]
+      }
+    }
+    window.onload = function() {
+      var subjectSel = document.getElementById("division");
+      var topicSel = document.getElementById("district");
+      var chapterSel = document.getElementById("thana");
+      for (var x in subjectObject) {
+        subjectSel.options[subjectSel.options.length] = new Option(x, x);
+      }
+      subjectSel.onchange = function() {
+        //empty Chapters- and Topics- dropdowns
+        chapterSel.length = 1;
+        topicSel.length = 1;
+        //display correct values
+        for (var y in subjectObject[this.value]) {
+          topicSel.options[topicSel.options.length] = new Option(y, y);
+        }
+      }
+      topicSel.onchange = function() {
+        //empty Chapters dropdown
+        chapterSel.length = 1;
+        //display correct values
+        var z = subjectObject[subjectSel.value][this.value];
+        for (var i = 0; i < z.length; i++) {
+          chapterSel.options[chapterSel.options.length] = new Option(z[i], z[i]);
+        }
+      }
+    }
+    </script>
+
+<div class="infoEdit">
+    <form method="post" action="/api/user/edit">
+        <div class="form-group row">
+            <div class="mb-3" style="margin-left: 180px">
+                <div class="image">
+                    <div class="imgprev" style="float: left; padding-left: 38px; font-family: Monaco, monospace; opacity: 0.9;">
+                        <img src="<%- user.IMAGE%>" id="profilePicturePreview" alt="profile picture" class="rounded-circle img-fluid"
+                            style="width: 150px; padding-top: 10px;" />
+                        <input accept="image/*" type="file" name="fileImage" id="inputProfilePicture"
+                            style="padding-top: 30px; font-family: Monaco, monospace; border: none; float: left;">
+                        <input type="hidden" id="profilePictureUrl" name="profile_picture" value="<%= user.IMAGE%>" />
+                        <br>                 
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="first_name" class="col-sm-2 col-form-label">First Name</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="first_name" name="first_name" value="<%= user.FIRST_NAME %>" required>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="last_name" class="col-sm-2 col-form-label">Last Name</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="last_name" name="last_name" value="<%= user.LAST_NAME %>" required>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="last_name" class="col-sm-2 col-form-label">Division </label>
+        <div class="col-sm-10">
+            <select name="division" id="division" class="form-control">
+                <option value="<%= user.DIVISION %> " selected="selected"><%= user.DIVISION %> </option>
+              </select>
+        </div>
+        </div>
+        <div class="form-group row">
+            <label for="last_name" class="col-sm-2 col-form-label">District </label>
+        <div class="col-sm-10">
+            <select name="district" id="district" class="form-control">
+                <option value="<%= user.DIVISION %> " selected="selected"> <%= user.DIVISION %></option>
+              </select>
+        </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="last_name" class="col-sm-2 col-form-label">Thana </label>
+        <div class="col-sm-10">
+            <select name="thana" id="thana" class="form-control">
+                <option value="<%= user.THANA %> " selected="selected"> <%= user.THANA %></option>
+              </select>
+        </div>
+        </div>
+        <div class="form-group row">
+            <label for="bio" class="col-sm-2 col-form-label">Biography</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="bio" name="bio" value="<%= user.BIO%>">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="experience" class="col-sm-2 col-form-label">Experience</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="about_me" name="experience" value="<%= user.EXPERIENCE %>">
+            </div>
+        </div>
+        
+        <button type="submit" class="btn btn-primary" style="text-align: center; margin: auto; display: flex;">Update</button>
+    </form>
+    <br/>
+    <br/>
+
+    <!-- error list -->
+
+    <form method="post" action="/api/user/password">
+        <div class="form-group row">
+            <label for="new_password" class="col-sm-2 col-form-label">New Password</label>
+            <div class="col-sm-10">
+                <input type="password" class="form-control" id="new_password" name="new_password" required minlength="8">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="cur_password" class="col-sm-2 col-form-label">Current Password</label>
+            <div class="col-sm-10">
+                <input type="password" class="form-control" id="cur_password" name="current_password" required minlength="8">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary" style="text-align: center; margin: auto; display: flex;">Change Password</button>
+    </form>
+</div>
+
+<script type="module">   
+        const firebaseConfig = {
+            apiKey: "AIzaSyB62OAM8frYYSIIVAlHXt4rs7MlghY62V8",
+            authDomain: "detectivesa.firebaseapp.com",
+            projectId: "detectivesa",
+            storageBucket: "detectivesa.appspot.com",
+            messagingSenderId: "934178223914",
+            appId: "1:934178223914:web:5a0fa65b51ce6a41385053"
+            };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        console.log("firebase initialized.")
+
+
+    // render the image file in image view
+        const imageInputField = document.getElementById("inputProfilePicture")
+        const preview = document.getElementById("profilePicturePreview")
+        const logUrlInputField = document.querySelector("#profilePictureUrl")
+        imageInputField.addEventListener("change", function () {
+            //console.log("image selected for logo")
+            if (this.files && this.files[0]) {
+                uploadToFirebase(this.files[0], logUrlInputField, function (imageUrl) {
+                    //console.log("adding image url to src")
+                    preview.setAttribute('src', imageUrl);
+                });
+            }
+        });
+        function uploadToFirebase(file, logUrlInputField, onUploadSuccess) {
+                const fileName = file.name;
+                // Points to the root reference
+                const storageRef = firebase.storage().ref();
+                // Points to 'images'
+                const imagesStorageRef = storageRef.child('images');
+                // space ref where image will be stored
+                const currentDate = new Date().getTime();
+                const spaceRef = imagesStorageRef.child(currentDate + "-" + fileName);
+                const uploadTask = spaceRef.put(file)
+                    .then(function (snapshot) {
+                        //console.info("image uploaded in firebase");
+                        // Handle successful uploads on complete
+                        // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+                        snapshot.ref.getDownloadURL().then((downloadURL) => {
+                            //console.log('File available at', downloadURL);
+                            logUrlInputField.setAttribute("value", downloadURL);
+                            onUploadSuccess(downloadURL);
+                        });
+                    })
+            }
+</script>

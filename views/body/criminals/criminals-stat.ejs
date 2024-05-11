@@ -1,0 +1,360 @@
+<div id="accordion">
+
+  <div class="card">
+    <div class="card-header">
+      <a class="card-link" data-toggle="collapse" href="#collapseOne">
+        Criminal List of Dhaka
+      </a>
+    </div>
+    <div id="collapseOne" class="collapse show" data-parent="#accordion">
+      <div class="card-body">
+        
+<% if (criminalsDhaka.length>0){%>
+<div class="table-responsive">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Criminal Id</th>
+        <th scope="col">Criminal Name</th>
+        <th scope="col">Location</th>
+        <th scope="col">More Details</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for (const crimi of criminalsDhaka) { %> 
+        <tr>
+        <td>Sherlocks_Riddle_<%= crimi.CRIMINAL_ID %></td>
+        <td><%= crimi.NAME%></td>
+        <td><%= crimi.LOCATION %></td>
+        <td><a href="/api/criminals/detailsCrimi/<%= crimi.CRIMINAL_ID%>" target="_blank">View Details</a></td>
+
+        </tr>
+        <%}%>
+    </tbody>
+    </table>
+  </div>
+
+  <% }else{%>
+    <p>NO CRIMINALS IN DATABASE TO SHOW</p>
+    <%}%>
+
+      
+      </div>
+    </div>
+  </div>
+
+
+  
+  <div class="card">
+    <div class="card-header">
+      <a class="card-link" data-toggle="collapse" href="#collapseOne">
+        Criminal List of Chattogram
+      </a>
+    </div>
+    <div id="collapseOne" class="collapse show" data-parent="#accordion">
+      <div class="card-body">
+        
+<% if (criminalsChattogram.length>0){%>
+<div class="table-responsive">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Criminal Id</th>
+        <th scope="col">Criminal Name</th>
+        <th scope="col">Location</th>
+        <th scope="col">More Details</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for (const crimi of criminalsChattogram) { %> 
+        <tr>
+        <td>Sherlocks_Riddle_<%= crimi.CRIMINAL_ID %></td>
+        <td><%= crimi.NAME%></td>
+        <td><%= crimi.LOCATION %></td>
+        <td><a href="/api/case/detailsCrimi/<%= crimi.CRIMINAL_ID%>" target="_blank">View Details</a></td>
+
+        </tr>
+        <%}%>
+    </tbody>
+    </table>
+  </div>
+
+  <% }else{%>
+    <p>NO CRIMINALS IN DATABASE TO SHOW</p>
+    <%}%>
+
+      
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="card">
+    <div class="card-header">
+      <a class="card-link" data-toggle="collapse" href="#collapseOne">
+        Criminal List of Rajshahi
+      </a>
+    </div>
+    <div id="collapseOne" class="collapse show" data-parent="#accordion">
+      <div class="card-body">
+        
+<% if (criminalsRajshahi.length>0){%>
+<div class="table-responsive">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Criminal Id</th>
+        <th scope="col">Criminal Name</th>
+        <th scope="col">Location</th>
+        <th scope="col">More Details</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for (const crimi of criminalsRajshahi) { %> 
+        <tr>
+        <td>Sherlocks_Riddle_<%= crimi.CRIMINAL_ID %></td>
+        <td><%= crimi.NAME%></td>
+        <td><%= crimi.LOCATION %></td>
+        <td><a href="/api/case/detailsCrimi/<%= crimi.CRIMINAL_ID%>" target="_blank">View Details</a></td>
+
+        </tr>
+        <%}%>
+    </tbody>
+    </table>
+  </div>
+
+  <% }else{%>
+    <p>NO CRIMINALS IN DATABASE TO SHOW</p>
+    <%}%>
+
+      
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <a class="card-link" data-toggle="collapse" href="#collapseOne">
+        Criminal List of Khulna
+      </a>
+    </div>
+    <div id="collapseOne" class="collapse show" data-parent="#accordion">
+      <div class="card-body">
+        
+<% if (criminalsKhulna.length>0){%>
+<div class="table-responsive">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Criminal Id</th>
+        <th scope="col">Criminal Name</th>
+        <th scope="col">Location</th>
+        <th scope="col">More Details</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for (const crimi of criminalsKhulna) { %> 
+        <tr>
+        <td>Sherlocks_Riddle_<%= crimi.CRIMINAL_ID %></td>
+        <td><%= crimi.NAME%></td>
+        <td><%= crimi.LOCATION %></td>
+        <td><a href="/api/case/detailsCrimi/<%= crimi.CRIMINAL_ID%>" target="_blank">View Details</a></td>
+
+        </tr>
+        <%}%>
+    </tbody>
+    </table>
+  </div>
+
+  <% }else{%>
+    <p>NO CRIMINALS IN DATABASE TO SHOW</p>
+    <%}%>
+
+      
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="card">
+    <div class="card-header">
+      <a class="card-link" data-toggle="collapse" href="#collapseOne">
+        Criminal List of Barishal
+      </a>
+    </div>
+    <div id="collapseOne" class="collapse show" data-parent="#accordion">
+      <div class="card-body">
+        
+<% if (criminalsBarishal.length>0){%>
+<div class="table-responsive">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Criminal Id</th>
+        <th scope="col">Criminal Name</th>
+        <th scope="col">Location</th>
+        <th scope="col">More Details</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for (const crimi of criminalsBarishal) { %> 
+        <tr>
+        <td>Sherlocks_Riddle_<%= crimi.CRIMINAL_ID %></td>
+        <td><%= crimi.NAME%></td>
+        <td><%= crimi.LOCATION %></td>
+        <td><a href="/api/case/detailsCrimi/<%= crimi.CRIMINAL_ID%>" target="_blank">View Details</a></td>
+
+        </tr>
+        <%}%>
+    </tbody>
+    </table>
+  </div>
+
+  <% }else{%>
+    <p>NO CRIMINALS IN DATABASE TO SHOW</p>
+    <%}%>
+
+      
+      </div>
+    </div>
+  </div>
+
+    
+  <div class="card">
+    <div class="card-header">
+      <a class="card-link" data-toggle="collapse" href="#collapseOne">
+        Criminal List of Sylhet
+      </a>
+    </div>
+    <div id="collapseOne" class="collapse show" data-parent="#accordion">
+      <div class="card-body">
+        
+<% if (criminalsSylhet.length>0){%>
+<div class="table-responsive">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Criminal Id</th>
+        <th scope="col">Criminal Name</th>
+        <th scope="col">Location</th>
+        <th scope="col">More Details</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for (const crimi of criminalsSylhet) { %> 
+        <tr>
+        <td>Sherlocks_Riddle_<%= crimi.CRIMINAL_ID %></td>
+        <td><%= crimi.NAME%></td>
+        <td><%= crimi.LOCATION %></td>
+        <td><a href="/api/case/detailsCrimi/<%= crimi.CRIMINAL_ID%>" target="_blank">View Details</a></td>
+
+        </tr>
+        <%}%>
+    </tbody>
+    </table>
+  </div>
+
+  <% }else{%>
+    <p>NO CRIMINALS IN DATABASE TO SHOW</p>
+    <%}%>
+
+      
+      </div>
+    </div>
+  </div>
+
+
+  <div class="card">
+    <div class="card-header">
+      <a class="card-link" data-toggle="collapse" href="#collapseOne">
+        Criminal List of Rangpur
+      </a>
+    </div>
+    <div id="collapseOne" class="collapse show" data-parent="#accordion">
+      <div class="card-body">
+        
+<% if (criminalsRangpur.length>0){%>
+<div class="table-responsive">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Criminal Id</th>
+        <th scope="col">Criminal Name</th>
+        <th scope="col">Location</th>
+        <th scope="col">More Details</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for (const crimi of criminalsRangpur) { %> 
+        <tr>
+        <td>Sherlocks_Riddle_<%= crimi.CRIMINAL_ID %></td>
+        <td><%= crimi.NAME%></td>
+        <td><%= crimi.LOCATION %></td>
+        <td><a href="/api/case/detailsCrimi/<%= crimi.CRIMINAL_ID%>" target="_blank">View Details</a></td>
+
+        </tr>
+        <%}%>
+    </tbody>
+    </table>
+  </div>
+
+  <% }else{%>
+    <p>NO CRIMINALS IN DATABASE TO SHOW</p>
+    <%}%>
+
+      
+      </div>
+    </div>
+  </div>
+   
+
+
+  <div class="card">
+    <div class="card-header">
+      <a class="card-link" data-toggle="collapse" href="#collapseOne">
+        Criminal List of Mymensingh
+      </a>
+    </div>
+    <div id="collapseOne" class="collapse show" data-parent="#accordion">
+      <div class="card-body">
+        
+<% if (criminalsMymensingh.length>0){%>
+<div class="table-responsive">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Criminal Id</th>
+        <th scope="col">Criminal Name</th>
+        <th scope="col">Location</th>
+        <th scope="col">More Details</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for (const crimi of criminalsMymensingh) { %> 
+        <tr>
+        <td>Sherlocks_Riddle_<%= crimi.CRIMINAL_ID %></td>
+        <td><%= crimi.NAME%></td>
+        <td><%= crimi.LOCATION %></td>
+        <td><a href="/api/case/detailsCrimi/<%= crimi.CRIMINAL_ID%>" target="_blank">View Details</a></td>
+
+        </tr>
+        <%}%>
+    </tbody>
+    </table>
+  </div>
+
+  <% }else{%>
+    <p>NO CRIMINALS IN DATABASE TO SHOW</p>
+    <%}%>
+
+      
+      </div>
+    </div>
+  </div>
+  
+
+  
+
+</div>

@@ -1,0 +1,208 @@
+<style> -->
+    @import url('https://fonts.googleapis.com/css?family=Numans');
+    html,body{
+    background-image: url('https://firebasestorage.googleapis.com/v0/b/detectivesa.appspot.com/o/images%2Fd.jpg?alt=media&token=720660af-d8bc-406d-9d17-740050493a8e'); 
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color:darkcyan;
+    height: 100%;
+    font-family: 'Numans', sans-serif;
+    }
+    .container-fluid{
+    height: 100%;
+    align-content: center;
+    }
+    .error{
+        color:white;
+    }
+    .card{
+    margin-top: auto;
+    margin-bottom: auto;
+    width: 500px;
+    background-color: rgba(54, 54, 54, 0.5) !important;
+    }
+    .card-header h3{
+    color: white;
+    }
+    input:focus{
+    outline: 0 0 0 0  !important;
+    box-shadow: 0 0 0 0 !important;
+    }
+    select:focus{
+    outline: 0 0 0 0  !important;
+    box-shadow: 0 0 0 0 !important;
+    }
+    .login_btn{
+    color: rgb(255, 255, 255);
+    background-color: #940031;
+    width: 100px;
+    }
+    .login_btn:hover{
+    color: #940031;
+    background-color: white;
+    }
+    .links{
+    color: white;
+    }
+    .links a{
+    color: rgb(35, 86, 255);
+    margin-left: 4px;
+    }
+  </style>
+  
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Bootsrap 4 CDN-->
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"> -->
+    
+    <!--Fontawesome CDN-->
+    <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+        integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+  
+    <title>
+        <%= title %>
+    </title> -->
+    <script>
+        var subjectObject = {
+          "Dhaka": {
+              "Dhaka":[ "Savar", "Dhamrai", "Keraniganj", "Nawabganj", "Dohar" ],
+              "Faridpur":[ "Faridpur Sadar",  "Alfadanga",   "Boalmari",  "Sadarpur",  "Nagarkanda",  "Bhanga",  "Charbhadrasan",  "Madhukhali",  "Saltha"],
+              "Gazipur":[ "Kaliganj",  "Kaliakair",  "Kapasia",  "Gazipur Sadar",  "Sreepur"],
+              "Gopalganj":["Gopalganj Sadar",  "Kashiani",  "Tungipara",  "Kotalipara",  "Muksudpur"],
+              "Kishoreganj":[ "Itna",  "Katiadi",  "Bhairab",  "Tarail",  "Hossainpur",  "Pakundia",  "Kuliarchar",  "Kishoreganj Sadar",  
+              "Karimgonj",  "Bajitpur",  "Austagram",  "Mithamoin",  "Nikli" ],
+              "Madaripur":[ "Madaripur Sadar",  "Shibchar",  "Kalkini",  "Rajoir"],
+              "Manikganj":[ "Harirampur",  "Saturia",  "Manikganj Sadar",  "Gior",  "Shibaloy",  "Doulatpur",  "Singiar"],
+              "Narayanganj":[ "Araihazar",  "Bandar",  "Narayanganj Sadar",  "Rupganj",  "Sonargaon"],
+              "Narsingdi":[ "Belabo",  "Monohardi",  "Narsingdi Sadar",  "Palash",  "Raipura",  "Shibpur"],
+              "Rajbari":[ "Rajbari Sadar",  "Goalanda",  "Pangsa",  "Baliakandi",  "Kalukhali"],
+              "Shariatpur":[ "Shariatpur Sadar",  "Naria",  "Zajira",  "Gosairhat",  "Bhedarganj",  "Damudya"]
+                
+            },
+          "Chattogram": {
+            "PHP": ["Variables", "Strings", "Arrays"],
+            "SQL": ["SELECT", "UPDATE", "DELETE"]
+          },
+          "Rajshahi": {
+            "PHP": ["Variables", "Strings", "Arrays"],
+            "SQL": ["SELECT", "UPDATE", "DELETE"]
+          },
+          "Khulna": {
+            "PHP": ["Variables", "Strings", "Arrays"],
+            "SQL": ["SELECT", "UPDATE", "DELETE"]
+          },
+          "Barishal": {
+            "PHP": ["Variables", "Strings", "Arrays"],
+            "SQL": ["SELECT", "UPDATE", "DELETE"]
+          },
+          "Sylhet": {
+            "PHP": ["Variables", "Strings", "Arrays"],
+            "SQL": ["SELECT", "UPDATE", "DELETE"]
+          },
+          "Rangpur": {
+            "PHP": ["Variables", "Strings", "Arrays"],
+            "SQL": ["SELECT", "UPDATE", "DELETE"]
+          },
+          "Mymensingh": {
+            "PHP": ["Variables", "Strings", "Arrays"],
+            "SQL": ["SELECT", "UPDATE", "DELETE"]
+          }
+        }
+        window.onload = function() {
+          var subjectSel = document.getElementById("subject");
+          var topicSel = document.getElementById("topic");
+          var chapterSel = document.getElementById("chapter");
+          for (var x in subjectObject) {
+            subjectSel.options[subjectSel.options.length] = new Option(x, x);
+          }
+          subjectSel.onchange = function() {
+            //empty Chapters- and Topics- dropdowns
+            chapterSel.length = 1;
+            topicSel.length = 1;
+            //display correct values
+            for (var y in subjectObject[this.value]) {
+              topicSel.options[topicSel.options.length] = new Option(y, y);
+            }
+          }
+          topicSel.onchange = function() {
+            //empty Chapters dropdown
+            chapterSel.length = 1;
+            //display correct values
+            var z = subjectObject[subjectSel.value][this.value];
+            for (var i = 0; i < z.length; i++) {
+              chapterSel.options[chapterSel.options.length] = new Option(z[i], z[i]);
+            }
+          }
+        }
+        </script>
+  </head>
+  <body>
+    <div class="container">
+        <div class="d-flex justify-content-center h-100">
+            <div class="card">
+                <div class="card-header">
+                    <h3>ADD CRIMINAL TO YOUR CASE</h3>
+                </div>
+                <div class="card-body">
+            
+                            <form action="/api/case/addCrimi/<%=cur_case_id%>" method="post">
+                               
+                                <div class="input-group form-group">
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="Enter Name of the Criminal" required
+                                        value="<%= (typeof form != 'undefined')? form.detective_id : '' %>">
+                                
+                                </div>
+  
+                                
+                                <div class="input-group form-group">
+                                    <input type="text" class="form-control" id="dob" name="dob" placeholder="Date of Birth" required
+                                        value="<%= (typeof form != 'undefined')? form.description : '' %>">
+  
+                                </div>
+                                <div class="input-group form-group">
+                                    <input type="text" class="form-control" id="image" name="image" placeholder="Enter Image URL" required
+                                        value="<%= (typeof form != 'undefined')? form.description : '' %>">
+  
+                                </div>
+                                <div class="input-group form-group">
+                                  <select name="subject" id="subject" class="form-control">
+                                      <option value="" selected="selected">Select Division</option>
+                                    </select>
+                              </div>
+                              <div class="input-group form-group">
+                                  <select name="topic" id="topic" class="form-control">
+                                      <option value="" selected="selected">Select District</option>
+                                    </select>
+                              </div>
+                              <div class="input-group form-group">
+                                  <select name="chapter" id="chapter" class="form-control">
+                                      <option value="" selected="selected">Select Thana/Upazila</option>
+                                    </select>
+                              </div>
+                              
+                                <div class="input-group form-group">
+                                    <input type="text" class="form-control" id="info" name="info" placeholder="Enter Info" required
+                                        value="<%= (typeof form != 'undefined')? form.resources : '' %>">
+                                </div>
+                                 <div class="form-group">
+                                    <input type="submit" value="Update" class="btn float-right login_btn">
+                                </div>
+                            </form>
+                </div>
+                <div class="card-footer">
+                    <div class="d-flex justify-content-center links">
+                        Have any confusion regarding the fields?<a href="/api/auth/helpPage">Help Page</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </body>

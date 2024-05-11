@@ -1,0 +1,62 @@
+
+
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+
+        let locations = <%- JSON.stringify(locations) %>;
+        let locationData = [];
+        locationData.push(['DAY','TOTAL CRIMINAL COUNT']);
+        for(let i=0;i<locations.length;i++){
+            let smallData = [locations[i].DIVISION, locations[i].TOTAL];
+            locationData.push(smallData);
+        }
+
+
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable(locationData);
+            var options = {
+                curveType: 'function',
+                bar: {groupWidth: "50%"},
+                legend: { position: 'bottom' }
+            };
+
+            var chart = new google.visualization.ColumnChart(document.getElementById('curve_chart'));
+            //var chart = new google.visualization.drawChart(document.getElementById('curve_chart'))
+            //var chart2 = new google.visualization.LineChart(document.getElementById('curve_chart2'));
+
+            chart.draw(data, options);
+            //chart2.draw(data, options);
+        }
+    </script>
+        
+            <div class="col-lg-6"   >
+                <div class="card shadow border-end-0 border-bottom-0 border-start-0 border-5 border-success m-2" >
+                    <div class="card-header">
+                        <h4> Division-wise Criminal Statistics</h4>
+                    </div>
+                    <div class="card-body">
+                        <div id="curve_chart" style="min-height: 500px; width: 850px;"></div>
+                    </div>
+                    <div class="card-footer"></div>
+                </div>
+            </div>
+            <!-- <div class="col-lg-6  mb-3" >
+                <div class="card shadow border-end-0 border-bottom-0 border-start-0 border-5 border-success m-2" >
+                    <div class="card-header">
+                        <h4> Yearly Earnings </h4>
+                    </div>
+                    <div class="card-body">
+                        <div id="curve_chart2" style="min-height: 500px"></div>
+                    </div>
+                    <div class="card-footer"></div>
+                </div>
+            </div> -->
+        </div>
+    </div>
+
+
+<!---->

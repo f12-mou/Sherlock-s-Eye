@@ -1,0 +1,93 @@
+]<style>
+    a:link { text-decoration: none; }
+    a:visited { text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    a:active { text-decoration: underline; }
+    </style>
+
+<div class="container py-5 h-100">
+    <div class="d-flex justify-content-center">
+        <!-- <div class="row"> -->
+            <form action="/api/cases/search" method="post">
+                <!-- <div class="row"> -->
+                    <!-- <div class="col-4"> -->
+                         <div class="input-group form-group">
+                        <input type="text" class="form-control" id="case_id" name="case_id" placeholder="Enter Case id here"
+                            value="<%= (typeof form != 'undefined')? form.name : '' %>">
+                        </div>
+                        <div class="input-group form-group">
+                            <input type="text" class="form-control" id="case_title" name="case_title" placeholder="Enter Case Title here"
+                                value="<%= (typeof form != 'undefined')? form.name : '' %>">
+                        </div>
+
+                        <div class="input-group form-group">
+                            <input type="text" class="form-control" id="det_id" name="det_id" placeholder="Enter Detective Id here"
+                                value="<%= (typeof form != 'undefined')? form.name : '' %>">
+                        </div>
+
+                        <div class="input-group form-group">
+                            <input type="text" class="form-control" id="client_id" name="client_id" placeholder="Enter Client Id here"
+                                value="<%= (typeof form != 'undefined')? form.name : '' %>">
+                        </div>
+                       
+                     
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary search_btn">Search <i class="fas fa-search"></i></button>
+                        </div>
+                    <!-- </div> -->
+                
+            </form>
+       
+
+<!-- <iv class="container py-5 h-100">
+    <div class="d-flex justify-content-center">
+        <div class="row">
+            <form action="/api/cases/search" method="post">
+                        <div class="input-group form-group">
+                            <input type="text" class="form-control" id="case_id" name="case_id" placeholder="Enter Case_ID here"
+                                value="<%= (typeof form != 'undefined')? form.name : '' %>">
+                        </div>
+                        <div class="input-group form-group">
+                            <input type="text" class="form-control" id="case_title" name="case_title" placeholder="Enter Case Title here"
+                                value="<%= (typeof form != 'undefined')? form.name : '' %>">
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary search_btn">Search <i class="fas fa-search"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </form> -->
+    
+    <% if (casesResult.length>0){%>
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Case_ID</th>
+            <th scope="col">Case Title</th>
+            <th scope="col">Status Code</th>
+            <th scope="col">More Details</th>
+          </tr>
+        </thead>
+        <tbody>
+            <% for (const demo of casesResult) { %> 
+              <tr>
+              <td>Sherlocks_Riddle_<%= demo.CASE_ID %></td>
+              <td><%= demo.TITLE%></td>
+              <td><%= demo.TYPE %></td>
+              <td><a href="/api/case/detailscase/<%= demo.CASE_ID%>" target="_blank">View Details</a></td>
+    
+              </tr>
+              <%}%>
+        </tbody>
+        </table>
+      </div>
+    
+      <% }else{%>
+        <p>NO CASES IN DATABASE TO SHOW</p>
+        <%}%>
+    

@@ -1,0 +1,43 @@
+<style>
+    a:link { text-decoration: none; }
+    a:visited { text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    a:active { text-decoration: underline; }
+    </style>
+    
+    <% if (arrayResult.length>0){%>
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Resource_ID</th>
+            <th scope="col">Title</th>
+            <th scope="col">Contributed by</th>
+            <th scope="col">Link</th>
+            <th scope="col">Date of Submission</th>
+            <th scope="col">More Details</th>
+          </tr>
+        </thead>
+        <tbody>
+            <% for (const demo of arrayResult) { %> 
+              <tr>
+              <td><%= demo.R_ID %></td>
+              <td><%= demo.TITLE%></td>
+              <td><%= demo.R_USER_ID %></td>
+              <td><%= demo.SOURCE %></td>
+              <td><%= demo.R_DATE %></td>
+              <td><a href="/api/resources/details/<%= demo.R_ID%>" target="_blank">View Details</a></td>
+              
+    
+              </tr>
+              <%}%>
+        </tbody>
+        </table>
+      </div>
+    
+      <% }else{%>
+        <p>NO resources IN DATABASE TO SHOW</p>
+        <%}%>
+    
+          
+    

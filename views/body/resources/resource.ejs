@@ -1,0 +1,72 @@
+<style>
+    .sidebar{
+        color: #940031;
+        background-color: white;
+        width: 300px;
+        margin-left: 20px;
+        margin-top: 20px;
+        box-shadow: 3px 5px rgb(204, 204, 204);
+    }
+    .sidebar ul{
+        padding-left: 20px;
+    }
+    .sidebar li .submenu{ 
+	list-style: none; 
+	margin: 0; 
+	padding-left: 30px; 
+	padding-right: 1rem;
+}
+.button2 {
+    display: block;
+    width: 115px;
+    height: 50px;
+    background: #4E9CAF;
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    line-height: 25px;
+}
+</style>
+
+
+
+
+
+
+
+
+
+
+<nav class="sidebar card py-2 mb-4" style="width: 750px;">
+<ul class="nav flex-column" id="nav_accordion">
+    <li class="nav-item " style="margin-left: 15px; margin-bottom: 20px;">
+        Resource_ID: Sherlocks_Resource_<%=caseResult.R_ID%>
+    </li>
+    <li class="nav-item " style="margin-left: 15px;margin-bottom: 20px;">
+        Resource_Title: <%=caseResult.TITLE%>
+    </li>
+    <li class="nav-item " style="margin-left: 15px;margin-bottom: 20px;">
+        Contributed by: <%=caseResult.R_USER_ID%>
+    </li>
+    <li class="nav-item " style="margin-left: 15px;margin-bottom: 20px;">
+        Source : <%=caseResult.SOURCE%>
+    </li>
+    <li class="nav-item has-submenu">
+        <a class="nav-link dropdown-toggle">Resource Description</a>
+        <ul class="submenu collapse">
+            <li><%=caseResult.DESCRIPTION %></li>
+        </ul>
+    </li>
+    <p>
+        <p></p>
+    </p>
+    <li class="nav-item " style="margin-left: 15px;margin-bottom: 20px;">
+        Date of Submission: <%=caseResult.R_DATE%>
+    </li>
+
+    
+
+</ul>
+</nav>

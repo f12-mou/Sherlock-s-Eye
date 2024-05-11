@@ -1,0 +1,12 @@
+npm init
+npm install oracledb
+npm install jsonwebtoken
+npm install jwt-simple
+npm install --save firebase
+npm install ejs
+npm install express --save-dev
+npm install cors
+npm install bootstrap@3
+npm install bcryptjs
+npm install --save dotenv
+npm install --save body-parser

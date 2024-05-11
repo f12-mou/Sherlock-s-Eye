@@ -1,0 +1,80 @@
+<style>
+    body{
+        background-color: aqua;
+    }
+    .start{
+        background-image: url('http://localhost:3000/images/app_pic1.jpg');
+        background-position:center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    /* CSS */
+.button-8 {
+  background-color: #d86907;
+  border-radius: 3px;
+  border: 1px solid #7aa7c7;
+  box-shadow: rgba(227, 183, 5, 0.656) 0 1px 0 0 inset;
+  box-sizing: border-box;
+  color: #0f0e0e;
+  cursor: pointer;
+  display: inline-block;
+  font-family: -apple-system,system-ui,"Segoe UI","Liberation Sans",sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.15385;
+  margin: 0;
+  outline: none;
+  padding: 8px .8em;
+  position: relative;
+  text-align: center;
+  text-decoration:double;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  white-space: nowrap;
+  grid-column: 6/7;
+  grid-row: 18/19;
+  
+}
+.containerButton
+{
+  display: grid;
+  grid-template-columns: repeat(8,1fr);
+  grid-template-rows: repeat(20,1fr);
+}
+
+.button-8:hover,
+.button-8:focus {
+  background-color: #e6bc24;
+  color: #060d12;
+}
+
+.button-8:focus {
+  box-shadow: 0 0 0 4px rgba(0, 149, 255, .15);
+}
+
+.button-8:active {
+  background-color: #daf10c;
+  box-shadow: none;
+  color: #1e1a17;
+}
+</style>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body class="start">
+    <div>
+      <form class="containerButton" action="/api/auth/register" method="post">
+        <!-- <button class="button-8" role="button">Continue</button> -->
+        <input type="submit" value="Continue" class="button-8">
+      </form>
+    </div>
+    
+</body>

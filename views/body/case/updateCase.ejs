@@ -1,0 +1,495 @@
+<style>
+    .sidebar{
+        color: #940031;
+        background-color: white;
+        width: 300px;
+        margin-left: 20px;
+        margin-top: 20px;
+        box-shadow: 3px 5px rgb(204, 204, 204);
+    }
+    .sidebar ul{
+        padding-left: 20px;
+    }
+    .sidebar li .submenu{ 
+	list-style: none; 
+	margin: 0; 
+	padding-left: 30px; 
+	padding-right: 1rem;
+}
+.button2 {
+    display: block;
+    width: 115px;
+    height: 50px;
+    background: #4E9CAF;
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    line-height: 25px;
+}
+</style>
+
+
+
+
+
+
+
+
+
+
+<nav class="sidebar card py-2 mb-4" style="width: 750px;">
+<ul class="nav flex-column" id="nav_accordion">
+    <li class="nav-item " style="margin-left: 15px; margin-bottom: 20px;">
+        CaseID: Sherlocks_Riddle_<%=caseResult.CASE_ID%>
+    </li>
+    <div class=" text-right" style="margin-bottom: 10px;">
+        <% if ((caseResult.TYPE==='Pending' || caseResult.TYPE==='pending') && (user.TYPE==='Client' || user.TYPE==='client') && 
+        user.USER_ID===caseResult.CLIENT_USER_ID){%>
+            <a href="/api/case/editCase/<%=caseResult.CASE_ID%>" class="editButton">Edit Case <%=caseResult.CASE_ID%><i class="fas fa-pen" style="margin-left: 5px;"></i></a>
+        <%}%>
+    </div>
+    <li class="nav-item " style="margin-left: 15px;margin-bottom: 20px;">
+        CaseTitle: <%=caseResult.TITLE%>
+    </li>
+
+    <li class="nav-item " style="margin-left: 15px;margin-bottom: 20px;">
+        Present Status Code: <%=caseResult.TYPE%>
+    </li>
+    <li class="nav-item " style="margin-left: 15px;margin-bottom: 20px;">
+        Requested By: <%=caseResult.CLIENT_USER_ID%>
+    </li>
+    <li class="nav-item " style="margin-left: 15px;margin-bottom: 20px;">
+        Requested To: <%=caseResult.DETECTIVE_ID%>
+    </li>
+    <li class="nav-item has-submenu">
+        <a class="nav-link dropdown-toggle">Case Description</a>
+        <ul class="submenu collapse">
+            <li><%=caseResult.DESCRIPTION %></li>
+        </ul>
+    </li>
+
+    <li class="nav-item has-submenu">
+        <a class="nav-link dropdown-toggle">Resources</a>
+        <ul class="submenu collapse">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                      <th scope="col">R_ID</th>
+                      <th scope="col">Resource_Title</th>
+                      <th scope="col">Resource_Link</th>
+                      <th scope="col">Resource_Description</th>
+                      <th scope="col">Uploaded_Date</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <%for(const demo of resources){%>
+                    <tr>
+                      <th scope="row"><%=demo.R_ID%></th>
+                      <td><%=demo.TITLE%></td>
+                      <td><a href="<%=demo.SOURCE%>"><%=demo.SOURCE%></a></td>
+                      <td><%=demo.DESCRIPTION%></td>
+                      <td><%=demo.R_DATE%></td>
+                    </tr>
+                    <%}%>
+                  </tbody>
+              </table>
+        </ul>
+    </li>
+
+
+    <li class="nav-item has-submenu">
+        <a class="nav-link dropdown-toggle">Location</a>
+        <ul class="submenu collapse">
+            <li>Thana : <%=caseResult.THANA%></li>
+            <li>District : <%=caseResult.DISTRICT%></li>
+            <li>Division : <%=caseResult.DIVISION%></li>
+        </ul>
+    </li>
+
+</ul>
+</nav>
+
+<%if(caseResult.DETECTIVE_ID === user.USER_ID && ((caseResult.TYPE === 'Requested') || (caseResult.TYPE === 'requested'))){%>
+    <a class="button2" href="/api/case/addTaka/<%=caseResult.CASE_ID%>" style="margin-left: 150px;">Accept</a>
+
+<%}%>
+<b>
+<%if(caseResult.DETECTIVE_ID === user.USER_ID && ((caseResult.TYPE === 'Requested') || (caseResult.TYPE === 'requested'))){%>
+    <a class="button2" href="/api/case/declined/<%=caseResult.CASE_ID%>" style="margin-left: 150px;">Reject</a>
+<%}%>
+
+
+
+<%if(caseResult.DETECTIVE_ID === user.USER_ID && (((caseResult.TYPE === 'Pending') || (caseResult.TYPE === 'pending')) || ((caseResult.TYPE === 'Solved') || (caseResult.TYPE === 'solved'))|| ((caseResult.TYPE === 'Unsolved') || (caseResult.TYPE === 'unsolved')) )){%>
+    <h3>So Far Update List For the Case</h3>
+    <nav class="sidebar card py-2 mb-4" style="width: 750px;">
+        <ul class="nav flex-column" id="nav_accordion">
+            <% for (i=0;i<updates.length;i=i+1) { %> 
+            <li class="nav-item has-submenu">
+                <a class="nav-link dropdown-toggle" target="_blank">
+                    Update-<%=i+1%>
+                </a>
+                <ul class="submenu collapse">
+                    <li>Update-ID: <%=updates[i].ID%></li>
+                    <li>Update Title:
+                        <em><%=updates[i].TITLE%></em></li>
+                    <li>Description:<em> <%=updates[i].DESCRIPTION%></em></li>
+                    <li>Used Method for Data Processing:<em> <%=updates[i].METHOD%></em></li>
+                </ul>
+            </li>
+            <%}%>
+        
+        </ul>
+     </nav>
+<%}%>
+
+
+
+<%if(caseResult.DETECTIVE_ID === user.USER_ID && ((caseResult.TYPE === 'Solved')||(caseResult.TYPE === 'solved'))) {%>
+    <nav class="sidebar card py-2 mb-4" style="width: 750px;">
+        <ul class="nav flex-column" id="nav_accordion">
+    <li class="nav-item has-submenu">
+        <a class="nav-link dropdown-toggle">
+            <h3>So Far Update List For the Case</h3>
+        </a>
+       
+    <ul class="submenu collapse">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                  <th scope="col">Crimi_ID</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Thana</th>
+                  <th scope="col">District</th>
+                  <th scope="col">Division</th>
+                  <th scope="col">DATE</th>
+                </tr>
+              </thead>
+              <tbody>
+                <%for(const demo of crimis){%>
+                <tr>
+                  <th scope="row"><%=demo.F_CRIMI_ID%></th>
+                  <td><%=demo.NAME%></td>
+                  <td><%=demo.THANA%></td>
+                  <td><%=demo.DISTRICT%></td>
+                  <td><%=demo.DIVISION%></td>
+                  <td><%=demo.F_DATE%></td>
+                </tr>
+                <%}%>
+              </tbody>
+          </table>
+    </ul>
+</li>
+</ul>
+</nav>
+<%}%>
+
+
+
+
+
+<%if(caseResult.DETECTIVE_ID === user.USER_ID && ((caseResult.TYPE === 'Solved') || (caseResult.TYPE === 'solved'))){%>
+    <h3>Complexity Level</h3>
+    <nav class="sidebar card py-2 mb-4" style="width: 750px;">
+        <ul class="nav flex-column" id="nav_accordion">
+             
+                <li class="nav-item has-submenu">
+                    <a class="nav-link dropdown-toggle" target="_blank">
+                        Challenges-1
+                    </a>
+                    <ul class="submenu collapse">
+                        <li><a class="nav-link" href="/api/group/all"><%=challenges[0].CHALLENGES%></a></li>
+                    </ul>
+                </li>
+                
+        
+        </ul>
+     </nav>
+<%}%>
+
+    <%if(caseResult.DETECTIVE_ID === user.USER_ID && ((caseResult.TYPE === 'Pending') || (caseResult.TYPE === 'pending'))){%>
+        <div class=" text-right" style="margin-bottom: 20px;margin-left: 15px;">
+            <a href="/api/case/updateCase/<%= caseResult.CASE_ID%>" class="editButton">Add another Update <i class="fas fa-pen" style="margin-left: 15px;"></i></a>
+        </div>
+        <%}%>
+
+        <%if(caseResult.CLIENT_USER_ID === user.USER_ID && ((caseResult.TYPE === 'Pending') || (caseResult.TYPE === 'pending'))){%>
+            <div class=" text-right" style="margin-bottom: 20px;margin-left: 15px;">
+                <a data-toggle="modal" data-target="#ModalResource" >Add another Resource <i class="fas fa-pen" style="margin-left: 15px;"></i></a>
+            </div>
+            <%}%>
+
+            <%if(caseResult.CLIENT_USER_ID === user.USER_ID && ((caseResult.TYPE === 'Declined') || (caseResult.TYPE === 'declined'))){%>
+                <div class=" text-right" style="margin-bottom: 20px;margin-left: 15px;">
+                    <a data-toggle="modal" data-target="#ModalFind" >Find another Detective <i class="fas fa-pen" style="margin-left: 15px;"></i></a>
+                </div>
+                <%}%>
+
+
+
+        
+        <nav class="sidebar card py-2 mb-4" style="width: 750px;">
+            <ul class="nav flex-column" id="nav_accordion">
+                <%if(caseResult.DETECTIVE_ID === user.USER_ID && (((caseResult.TYPE === 'Pending') || (caseResult.TYPE === 'pending'))|| ((caseResult.TYPE === 'solved') || (caseResult.TYPE === 'Solved'))) ){%>
+                <li class="nav-item has-submenu">
+                    <a class="nav-link dropdown-toggle">Completion of Investigation</a>
+                    <ul class="submenu collapse">
+                        <li>
+                            <%if(caseResult.DETECTIVE_ID === user.USER_ID && ((caseResult.TYPE === 'Pending') || (caseResult.TYPE === 'pending'))){%>
+                            <!-- <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#ModalExample">
+                                Proceed towards Payment
+                            </button> -->
+                            <a data-toggle="modal" data-target="#ModalExample">
+                                <u><i>Proceed towards Payment</i></u>
+                            </a>
+                            <%}%>
+                            <p></p>
+                            <%if(caseResult.DETECTIVE_ID === user.USER_ID && ((caseResult.TYPE === 'Solved') || (caseResult.TYPE === 'solved'))){%>
+                            <a href="/api/case/cart/<%=caseResult.CASE_ID%>" data-toggle="modal" data-target="#myModal">Share Experience</a>
+                            <p>
+                                
+                            </p>
+                            <a href="/api/case/addCrimi/<%=caseResult.CASE_ID%>">Add Criminal Info</a>
+                            <%}%>
+                        </li>
+                    </ul>
+                </li><%}%>
+                <%if(caseResult.DETECTIVE_ID === user.USER_ID && ((caseResult.TYPE === 'Pending') || (caseResult.TYPE === 'pending'))){%>
+                <li class="nav-item has-submenu">
+                    <a class="nav-link dropdown-toggle">Failure of Solving</a>
+                    <ul class="submenu collapse">
+                        <li>
+                            <a data-toggle="modal" data-target="#ModalFailure">Add Reasons</a>
+                        </li>
+                    </ul>
+                </li>
+                <%}%>
+            </ul>
+            </nav>
+    
+<!-- Modal HTML Markup -->
+<div id="ModalExample" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title text-xs-center">Creating a Deal</h4>
+            </div>
+            <div class="modal-body">
+                
+                <form  method="POST" action="/api/case/cart/<%=caseResult.CASE_ID%>">
+                    <input type="hidden" name="_token" value="">
+                    <div class="form-group">
+                        <label class="control-label">Add an Amount</label>
+                        <div>
+                            <input type="text" class="form-control input-lg" name="taka" value="5000">
+                        </div>
+                    </div>
+                    
+                        <div>
+                            <a class="btn btn-link" href="">Sure to proceed?</a>
+                            <button type="submit" class="btn btn-info btn-block">send confirmation</button>
+                        </div>
+                
+                </form>
+            </div>
+            <div class="modal-footer text-xs-center">
+                Don't have an account? <a href="/auth/register">Sign up »</a>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+<!-- Modal HTML Markup -->
+<div id="ModalResource" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title text-xs-center">Adding A Resource</h4>
+            </div>
+            <div class="modal-body">
+            
+                <form  method="POST" action="/api/case/addResource/<%=caseResult.CASE_ID%>">
+                    <input type="hidden" name="_token" value="">
+                    <div class="form-group">
+                        <label class="control-label">Enter Resource Title</label>
+                        <div>
+                            <input type="text" class="form-control input-lg" name="title" value="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Enter Resource Link</label>
+                        <div>
+                            <input type="text" class="form-control input-lg" name="Link" value="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Add Description</label>
+                        <div>
+                            <input type="text" class="form-control input-lg" name="description" value="">
+                        </div>
+                    </div>
+                    
+                        <div>
+                            <a class="btn btn-link" href="">Sure to proceed?</a>
+                            <button type="submit" class="btn btn-info btn-block">Confirm to Add</button>
+                        </div>
+                
+                </form>
+            </div>
+            <div class="modal-footer text-xs-center">
+                Don't have an account? <a href="/auth/register">Sign up »</a>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+
+<div id="myModal" class="modal fade" style="background-color: white;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title text-xs-center">CONGRATULATIONS</h4>
+                <div class="card-body text-center"> <img src="https://img.icons8.com/bubbles/200/000000/trophy.png">
+                
+                <p><em>You have successfully solved our Sherlock's case with your outstanding wisdom and integrity!</em></p> 
+                <p></p>
+            </div>
+            </div>
+            <div class="modal-body">
+            
+                <form  method="POST" action="/api/case/updateChallenge/<%=caseResult.CASE_ID%>">
+                    <div class="form-group">
+                        <label class="control-label">Share your Experience</label>
+                        <div>
+                            <input type="text" class="form-control input-lg" name="experience" value="">
+                        </div>
+                    </div>
+                    
+                    
+                        <div>
+                            <a class="btn btn-link" href="">Sure to proceed?</a>
+                            <button type="submit" class="btn btn-info btn-block">Continue</button>
+                        </div>
+                
+                </form>
+            </div>
+            <div class="modal-footer text-xs-center">
+                Thanks for being with us
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="ModalFailure" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel"><em>'Success is not final, failure is not fatal' - Winston Churchill</em></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form  method="POST" action="/api/case/updateFailure/<%=caseResult.CASE_ID%>">
+                <div class="form-group">
+                    <label class="control-label">What were the limitations?</label>
+                    <div>
+                        <input type="text" class="form-control input-lg" name="limitation" value="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Let us know some Probable Reasons:</label>
+                    <div>
+                        <input type="text" class="form-control input-lg" name="reason" value="">
+                    </div>
+                </div>
+                
+                
+                    <div>
+                        <a class="btn btn-link" href="">Sure to proceed?</a>
+                        <button type="submit" class="btn btn-info btn-block">Continue</button>
+                    </div>
+            
+            </form>
+        </div>
+        <div class="modal-footer">
+            <p><em>We know you tried a lot, but it happens.</em></p>
+          </div>
+      </div>
+    </div>
+  </div>
+
+
+<!-- Modal HTML Markup -->
+<div id="ModalFind" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title text-xs-center">Finding you another Detective</h4>
+            </div>
+            <div class="modal-body">
+            
+                <form  method="POST" action="/api/case/addDetective/<%=caseResult.CASE_ID%>">
+                    <input type="hidden" name="_token" value="">
+                    <div class="form-group">
+                        <label class="control-label">Enter Detective</label>
+                        <div>
+                            <input type="text" class="form-control input-lg" name="reqDetective" value="">
+                        </div>
+                    </div>
+                    
+                        <div>
+                            <a class="btn btn-link" href="">Sure to proceed?</a>
+                            <button type="submit" class="btn btn-info btn-block">Confirm to Add</button>
+                        </div>
+                
+                </form>
+            </div>
+            <div class="modal-footer text-xs-center">
+               Hope your detective will accept the case <a href="/auth/register">Help Page »</a>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+     
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+            document.querySelectorAll('.sidebar .nav-link').forEach(function (element) {
+
+                element.addEventListener('click', function (e) {
+
+                    let nextEl = element.nextElementSibling;
+                    let parentEl = element.parentElement;
+
+                    if (nextEl) {
+                        e.preventDefault();
+                        let mycollapse = new bootstrap.Collapse(nextEl);
+
+                        if (nextEl.classList.contains('show')) {
+                            mycollapse.hide();
+                        } else {
+                            mycollapse.show();
+                            // find other submenus with class=show
+                            var opened_submenu = parentEl.parentElement.querySelector('.submenu.show');
+                            // if it exists, then close all of them
+                            if (opened_submenu) {
+                                new bootstrap.Collapse(opened_submenu);
+                            }
+                        }
+                    }
+                }); // addEventListener
+            }) // forEach
+        }); 
+</script>

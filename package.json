@@ -1,0 +1,35 @@
+{
+  "name": "detectives",
+  "version": "1.0.0",
+  "description": "A project dedicated on the field of criminology",
+  "main": "app.js",
+  "html.validate.scripts": false,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "author": "moushe-ava",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.0",
+    "bootstrap": "^3.4.1",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "ejs": "^3.1.8",
+    "express-session": "^1.17.3",
+    "firebase": "^9.9.0",
+    "jquery": "^3.6.0",
+    "json-stringify": "^1.0.0",
+    "jsonwebtoken": "^8.5.1",
+    "jwt-redis": "^7.0.3",
+    "jwt-simple": "^0.5.6",
+    "nodemon": "^2.0.19",
+    "oracledb": "^5.4.0",
+    "redis": "^4.3.0"
+  },
+  "devDependencies": {
+    "express": "^4.18.1"
+  }
+}

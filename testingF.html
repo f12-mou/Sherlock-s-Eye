@@ -1,0 +1,115 @@
+<html>
+   <head>
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  </head>
+   <body>
+     <div class="mb-3">
+        <label for="inputCategoryLogo" class="form-label">Logo Image</label>
+        <input type="file"
+               accept="image/*"
+               class="form-control form-control-sm"
+               id="inputCategoryLogo"/>
+
+        <div class="my-3">
+            <div class="progress">
+                <div id="imageUploadProgressBar" class="progress-bar" role="progressbar" style="width: 0%;"
+                     aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+        </div>
+
+  
+        <input type="hidden" id="categoryLogoUrl" name="logo" value="">
+          
+         <img id="category-logo" class="card-img-top"
+                         src="/images/image-placeholder.png"
+                         style="max-width: 40rem; max-height: 40rem"
+                         alt="Card image cap">
+    </div>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-storage.js"></script>
+     <script>
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyB62OAM8frYYSIIVAlHXt4rs7MlghY62V8",
+            authDomain: "detectivesa.firebaseapp.com",
+            projectId: "detectivesa",
+            storageBucket: "detectivesa.appspot.com",
+            messagingSenderId: "934178223914",
+            appId: "1:934178223914:web:5a0fa65b51ce6a41385053"
+            };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        console.log("firebase initialized.")
+        // render the image file in image view
+        const imageInputField = document.getElementById("inputCategoryLogo")
+        const preview = document.getElementById("category-logo")
+        const hiddenImageUrlHolderInputField = document.getElementById("categoryLogoUrl");
+        onImageSelected(imageInputField, preview, hiddenImageUrlHolderInputField);
+        function onImageSelected(inputImageField, previewImg, imageUrlHolderHiddenInputField) {
+            const funcName = "onImageSelected(): ";
+            console.log(funcName);
+            inputImageField.addEventListener("change", function () {
+                console.log(funcName + "image selected for logo")
+                if (this.files && this.files[0]) {
+                    uploadToFirebase(this.files[0], function (imageUrl) {
+                        console.log(funcName + "adding image url to src")
+                        imageUrlHolderHiddenInputField.setAttribute("value", imageUrl);
+                        previewImg.setAttribute('src', imageUrl);
+                    });
+                }
+            });
+        }
+        function uploadToFirebase(file, onUploadSuccess) {
+            const fileName = file.name;
+            // Points to the root reference
+            const storageRef = firebase.storage().ref();
+            // Points to 'images'
+            const imagesStorageRef = storageRef.child('images');
+            // space ref where image will be stored
+            const currentDate = new Date().getTime();
+            const spaceRef = imagesStorageRef.child(currentDate + "-" + fileName);
+            const uploadTask = spaceRef.put(file);
+            uploadTask.on('state_changed',
+                (snapshot) => {
+                    // Observe state change events such as progress, pause, and resume
+                    // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+                    let progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                    console.log('Upload is ' + progress + '% done');
+                    const imageUploadProgressBar = document.querySelector("#imageUploadProgressBar");
+                    imageUploadProgressBar.setAttribute("style", "width: " + progress + "%;");
+                    imageUploadProgressBar.setAttribute("aria-valuenow", progress + "");
+                },
+                (error) => {
+                    // Handle unsuccessful uploads
+                },
+                () => {
+                    uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+                        console.log('File available at', downloadURL);
+                        onUploadSuccess(downloadURL);
+                    });
+                }
+            );
+        }
+        function parseImageNameFromUrl(imageUrl){
+            const startIdx = imageUrl.indexOf("images%2F") + "images%2F".length;
+            const endIdx = imageUrl.indexOf("?alt",startIdx);
+            const imageName = imageUrl.substring(startIdx, endIdx);
+            console.log("parseImageNameFromUrl()->"+imageName);
+        }
+        function deleteImageFromFirebaseStorage(imageUrl) {
+            const imageName = parseImageNameFromUrl(imageUrl)
+            // Create a reference to the file to delete
+            const desertRef = storageRef.child('images/'+imageName);
+            // Delete the file
+            desertRef.delete().then(() => {
+                // File deleted successfully
+                console.log(imageName+" deleted successfully form firebase")
+            }).catch((error) => {
+                // Uh-oh, an error occurred!
+                console.log(imageName+" was not deleted from firebase.")
+            });
+        }
+    </script>
+  </body>
+</html>

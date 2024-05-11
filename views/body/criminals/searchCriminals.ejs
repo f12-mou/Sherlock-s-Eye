@@ -1,0 +1,77 @@
+
+
+<div class="container py-5 h-100">
+    <div class="d-flex justify-content-center">
+        <div class="row">
+            <form action="/api/criminals/search" method="post">
+                <div class="row">
+                    <div class="col-4">
+                        <div class="input-group form-group">
+                            <input type="text" class="form-control" id="criminal_id" name="criminal_id" placeholder="Enter Criminal_ID here"
+                                value="<%= (typeof form != 'undefined')? form.name : '' %>">
+                        </div>
+                        <div class="input-group form-group">
+                          <input type="text" class="form-control" id="name" name="name" placeholder="Enter Criminal Name here"
+                              value="<%= (typeof form != 'undefined')? form.name : '' %>">
+                      </div>
+                      <!-- <div class="input-group form-group">
+                        <input type="text" class="form-control" id="case_id" name="case_id" placeholder="Enter Case id here"
+                            value="<%= (typeof form != 'undefined')? form.name : '' %>">
+                    </div> -->
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary search_btn">Search <i class="fas fa-search"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+       
+
+<div class="card">
+    <div class="card-header">
+      <a class="card-link" data-toggle="collapse" href="#collapseOne">
+        Searched Criminal List 
+      </a>
+    </div>
+    <div id="collapseOne" class="collapse show" data-parent="#accordion">
+      <div class="card-body">
+
+<% if (users.length>0){%>
+                <div class="table-responsive">
+                  <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th scope="col">Criminal Id</th>
+                        <th scope="col">Criminal Name</th>
+                        <th scope="col">Location</th>
+                        <th scope="col">More Details</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <% for (const crimi of users) { %> 
+                            <tr>
+                            <td>Sherlocks_Riddle_<%= crimi.CRIMINAL_ID %></td>
+                            <td><%= crimi.NAME%></td>
+                            <td><%= crimi.LOCATION %></td>
+                            <td><a href="/api/criminals/detailsCrimi/<%= crimi.CRIMINAL_ID%>" target="_blank">View Details</a></td>
+                  
+                            </tr>
+                            <%}%>
+                    </tbody>
+                    </table>
+                  </div>
+                
+                  <% }else{%>
+                    <p>NO CRIMINALS IN DATABASE TO SHOW</p>
+                    <%}%>
+              
+                      
+                      
+                  </div>
+                </div>
+            </div>
+        </div>
+        
+                  
+   

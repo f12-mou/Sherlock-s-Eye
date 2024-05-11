@@ -1,0 +1,39 @@
+<nav class="sidebar card py-2 mb-4" style="width: 750px;">
+    <ul class="nav flex-column" id="nav_accordion">
+        <li class="nav-item " style="margin-left: 15px; margin-bottom: 20px;">
+            Criminal Id : <%= crimi.CRIMINAL_ID %>
+    
+        </li>
+       
+        <li class="nav-item " style="margin-left: 15px;margin-bottom: 20px;">
+            Criminal Name:  <%= crimi.CRIMINAL_ID %>
+        </li>
+        <li class="nav-item " style="margin-left: 15px;margin-bottom: 20px;">
+            Date of Birth : <%= crimi.DOB %>
+        </li>
+        <li class="nav-item " style="margin-left: 15px;margin-bottom: 20px;">
+            Location: 
+            <li class="nav-item " style="margin-left: 15px;margin-bottom: 20px;">
+               Division: <%= crimi.DIVISION %>   
+            </li>
+
+            <li class="nav-item " style="margin-left: 15px;margin-bottom: 20px;">
+                District: <%= crimi.DISTRICT %>   
+             </li>
+             <li class="nav-item " style="margin-left: 15px;margin-bottom: 20px;">
+               Thana: <%= crimi.THANA %>   
+             </li>
+
+        </li>
+        <li class="nav-item has-submenu">
+            <a class="nav-link dropdown-toggle">Case Description</a>
+            <ul class="submenu collapse">
+                <li><%= crimi.INFO%></li>
+            </ul>
+        </li>
+    
+    
+    
+    
+    </ul>
+    </nav>
